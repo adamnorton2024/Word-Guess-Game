@@ -1,6 +1,6 @@
 body {
     background-image: url('../images/bg_carbonstrips.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
+    background-position: top;
+    background-repeat: repeat;
     background-size: cover;
 }
