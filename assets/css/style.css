@@ -1,5 +1,5 @@
 * {
-    border: 1px dotted blue;
+    /*border: 1px dotted blue;*/
 }
 
 body {
@@ -79,4 +79,14 @@ p {
 
 .half-space{
     width: 50%;
+}
+
+#guessing-area{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#secret-word{
+    font-size: 2em;
 }
