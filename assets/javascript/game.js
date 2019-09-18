@@ -6,16 +6,19 @@ var guessesLeft = 10;
 var lettersGuessed = [];
 var started = false;
 
+
+
 function startGame(){
-    
-    document.onkeypress = function() { 
+
+    document.addEventListener("keyup", function (){
         
-        if(!started){
+        if (!started) {
             started = true;
             document.getElementById('guesses-left').innerHTML = guessesLeft;
             playGame();
         }
-    };
+
+    });
 };
 
 function playGame(){
@@ -48,6 +51,7 @@ function guesses() {
     }
     
 };
+
 
 startGame();
 
