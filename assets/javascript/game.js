@@ -12,7 +12,7 @@ function startGame(){
 }
 
 function playGame(){
-    document.getElementById('message').innerHTML = " ";
+    document.getElementById("game-message").style.visibility = "hidden";
     secretWord = wordChoices[Math.floor(Math.random() * wordChoices.length)];
     letterMasking();
 }
