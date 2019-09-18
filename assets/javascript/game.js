@@ -2,20 +2,28 @@ var wordChoices = ["website", "gamer", "artist", "student", "football", "vehicle
 var secretWord = " ";
 var wins = 0;
 var losses = 0;
-var guessesLeft;
+var guessesLeft = 10;
 var lettersGuessed = [];
+var started = false;
 
 function startGame(){
     
-    document.onkeypress = function(keyPress) { playGame() };
-
-}
+    document.onkeypress = function() { 
+        
+        if(!started){
+            started = true;
+            document.getElementById('guesses-left').innerHTML = guessesLeft;
+            playGame();
+        }
+    };
+};
 
 function playGame(){
     document.getElementById("game-message").style.visibility = "hidden";
     secretWord = wordChoices[Math.floor(Math.random() * wordChoices.length)];
     letterMasking();
-}
+    guesses();
+};
 
 function letterMasking(){
     var maskedLetters = "";
@@ -26,7 +34,20 @@ function letterMasking(){
     console.log(maskedLetters);
     console.log(secretWord);
 
-}
+};
+
+function guesses() {
+    started = true;
+    if(started){
+        document.onkeyup = function (keyPress) {
+            //Determines which key was pressed.
+            var userGuess = keyPress.key;
+            lettersGuessed.push(userGuess);
+            document.getElementById('already-guessed').innerHTML = lettersGuessed;
+        }
+    }
+    
+};
 
 startGame();
 
