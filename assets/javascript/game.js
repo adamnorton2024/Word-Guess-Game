@@ -5,21 +5,22 @@ var losses = 0;
 var guessesLeft = 10;
 var lettersGuessed = [];
 var started = false;
-
+var maskedLetters = "";
+var userGuess = "";
 
 
 function startGame(){
 
     document.addEventListener("keyup", function (){
-        
+
         if (!started) {
             started = true;
             document.getElementById('guesses-left').innerHTML = guessesLeft;
             playGame();
         }
-
     });
 };
+
 
 function playGame(){
     document.getElementById("game-message").style.visibility = "hidden";
@@ -28,30 +29,65 @@ function playGame(){
     guesses();
 };
 
+
 function letterMasking(){
-    var maskedLetters = "";
+   /* maskedLetters = "";*/
     for(var i=0; i < secretWord.length; i++){
         maskedLetters += "_";
     }
     document.getElementById('secret-word').innerHTML = maskedLetters;
-    console.log(maskedLetters);
-    console.log(secretWord);
-
+    updateSecretWord();
 };
+
 
 function guesses() {
-    started = true;
-    if(started){
-        document.onkeyup = function (keyPress) {
-            //Determines which key was pressed.
-            var userGuess = keyPress.key;
-            lettersGuessed.push(userGuess);
+ 
+    document.onkeyup = function (keyPress) {
+
+        // Determines which key was pressed.
+        userGuess = keyPress.key;
+        lettersGuessed.push(userGuess);
+        
+
+        if (guessesLeft > 0){
+            guessesLeft--;
+            document.getElementById("guesses-left").innerHTML = guessesLeft;
             document.getElementById('already-guessed').innerHTML = lettersGuessed;
+            updateSecretWord();
+                if(guessesLeft === 0){
+                    console.log("you lose!");
+                    document.getElementById("guesses-left").innerHTML = guessesLeft;
+                    document.getElementById("game-message").innerHTML = "YOU LOSE!";
+                    document.getElementById("game-message").style.visibility = "visible";
+                    lostGame();
+                }
+            
         }
-    }
-    
+    };
 };
 
 
-startGame();
+function updateSecretWord(){
+    var indices = [];
+    for (var i=0; i < secretWord.length; i++ ){
+        if(secretWord[i] === userGuess){
+            indices.push(i);
+        }
+    }
 
+    for(var i = 0; i < indices.length; i++){
+        maskedLetters[indices[i]] = userGuess; 
+    }
+    console.log('masked letters updated should be below here.');
+    console.log(maskedLetters);
+    console.log(secretWord);
+    console.log(indices);
+};
+
+function lostGame(){
+    losses++;
+    document.getElementById("losses").innerHTML = losses;
+
+}
+
+startGame();
