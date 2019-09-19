@@ -5,7 +5,7 @@ var losses = 0;
 var guessesLeft = 10;
 var lettersGuessed = [];
 var started = false;
-var maskedLetters = "";
+var maskedLetters = [];
 var userGuess = "";
 
 
@@ -31,11 +31,11 @@ function playGame(){
 
 
 function letterMasking(){
-   /* maskedLetters = "";*/
+    maskedLetters = [];
     for(var i=0; i < secretWord.length; i++){
-        maskedLetters += "_";
+        maskedLetters.push("_");
     }
-    document.getElementById('secret-word').innerHTML = maskedLetters;
+
     updateSecretWord();
 };
 
@@ -49,7 +49,7 @@ function guesses() {
         lettersGuessed.push(userGuess);
         
 
-        if (guessesLeft > 0){
+        if (guessesLeft > 0 ){
             guessesLeft--;
             document.getElementById("guesses-left").innerHTML = guessesLeft;
             document.getElementById('already-guessed').innerHTML = lettersGuessed;
@@ -57,8 +57,6 @@ function guesses() {
                 if(guessesLeft === 0){
                     console.log("you lose!");
                     document.getElementById("guesses-left").innerHTML = guessesLeft;
-                    document.getElementById("game-message").innerHTML = "YOU LOSE!";
-                    document.getElementById("game-message").style.visibility = "visible";
                     lostGame();
                 }
             
@@ -68,25 +66,33 @@ function guesses() {
 
 
 function updateSecretWord(){
-    var indices = [];
+    // var indices = [];
     for (var i=0; i < secretWord.length; i++ ){
         if(secretWord[i] === userGuess){
-            indices.push(i);
+            // indices.push(i);
+            maskedLetters[i] = userGuess;
         }
     }
 
-    for(var i = 0; i < indices.length; i++){
-        maskedLetters[indices[i]] = userGuess; 
-    }
+    document.getElementById('secret-word').innerHTML = maskedLetters.join("");
+
     console.log('masked letters updated should be below here.');
     console.log(maskedLetters);
     console.log(secretWord);
-    console.log(indices);
+    // console.log(indices);
 };
 
 function lostGame(){
     losses++;
     document.getElementById("losses").innerHTML = losses;
+    secretWord = "";
+    maskedLetters = "";
+    document.getElementById('secret-word').innerHTML = secretWord;
+    guessesLeft = 10;
+    document.getElementById('guesses-left').innerHTML = guessesLeft;
+    lettersGuessed = [];
+    document.getElementById('already-guessed').innerHTML = lettersGuessed;
+    playGame();
 
 }
 
