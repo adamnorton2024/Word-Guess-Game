@@ -47,37 +47,40 @@ function guesses() {
         // Determines which key was pressed.
         userGuess = keyPress.key;
         lettersGuessed.push(userGuess);
-        
 
-        if (guessesLeft > 0 ){
+        var letter = secretWord.indexOf(userGuess);
+        if(letter === -1){
+            console.log("letter is not in secret word.");
             guessesLeft--;
             document.getElementById("guesses-left").innerHTML = guessesLeft;
             document.getElementById('already-guessed').innerHTML = lettersGuessed;
             updateSecretWord();
-                if(guessesLeft === 0){
-                    console.log("you lose!");
-                    document.getElementById("guesses-left").innerHTML = guessesLeft;
-                    lostGame();
-                }
-            
+            if (guessesLeft === 0) {
+                console.log("you lose!");
+                document.getElementById("guesses-left").innerHTML = guessesLeft;
+                lostGame();
+            };
+        } else {
+            console.log('letter is in the secret word!');
+            updateSecretWord();
         }
     };
 };
 
 
 function updateSecretWord(){
-    // var indices = [];
+    
     for (var i=0; i < secretWord.length; i++ ){
         if(secretWord[i] === userGuess){
-            // indices.push(i);
             maskedLetters[i] = userGuess;
         }
     }
 
     document.getElementById('secret-word').innerHTML = maskedLetters.join("");
+    
 
-    console.log('masked letters updated should be below here.');
-    console.log(maskedLetters);
+   // console.log('masked letters updated should be below here.');
+   // console.log(maskedLetters);
     console.log(secretWord);
     // console.log(indices);
 };
@@ -95,5 +98,7 @@ function lostGame(){
     playGame();
 
 }
+
+
 
 startGame();
