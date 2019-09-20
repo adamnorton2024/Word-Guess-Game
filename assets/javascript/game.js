@@ -48,52 +48,31 @@ function guesses() {
         userGuess = keyPress.key;
 
         var x = lettersGuessed.indexOf(userGuess);
-        console.log("var x =" + x);
+        //console.log("var x =" + x);
         if ( x === -1){
             lettersGuessed.push(userGuess);
             var letter = secretWord.indexOf(userGuess);
             if (letter === -1) {
-                console.log("letter is not in secret word.");
+                //console.log("letter is not in secret word.");
                 guessesLeft--;
                 document.getElementById("guesses-left").innerHTML = guessesLeft;
                 document.getElementById('already-guessed').innerHTML = lettersGuessed;
                 updateSecretWord();
                 if (guessesLeft === 0) {
-                    console.log("you lose!");
+                    //console.log("you lose!");
                     document.getElementById("guesses-left").innerHTML = guessesLeft;
                     lostGame();
                 };
             } else {
-                console.log('letter is in the secret word!');
+                //console.log('letter is in the secret word!');
                 updateSecretWord();
                 if (maskedLetters.join("") === secretWord) {
-                    console.log('you win!');
+                    //console.log('you win!');
                     winGame();
                 }
             };
         }
         
-        
-        // var letter = secretWord.indexOf(userGuess);
-        // if(letter === -1){
-        //     console.log("letter is not in secret word.");
-        //     guessesLeft--;
-        //     document.getElementById("guesses-left").innerHTML = guessesLeft;
-        //     document.getElementById('already-guessed').innerHTML = lettersGuessed;
-        //     updateSecretWord();
-        //     if (guessesLeft === 0) {
-        //         console.log("you lose!");
-        //         document.getElementById("guesses-left").innerHTML = guessesLeft;
-        //         lostGame();
-        //     };
-        // } else {
-        //     console.log('letter is in the secret word!');
-        //     updateSecretWord();
-        //     if(maskedLetters.join("") === secretWord){
-        //         console.log('you win!');
-        //         winGame();
-        //     }
-        // };
     };
 };
 
@@ -110,8 +89,8 @@ function updateSecretWord(){
     
 
    // console.log('masked letters updated should be below here.');
-   console.log(maskedLetters);
-    console.log(secretWord);
+   //console.log(maskedLetters);
+    //console.log(secretWord);
     // console.log(indices);
 };
 
