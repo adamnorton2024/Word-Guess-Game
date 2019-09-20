@@ -63,6 +63,10 @@ function guesses() {
         } else {
             console.log('letter is in the secret word!');
             updateSecretWord();
+            if(maskedLetters.join("") === secretWord){
+                console.log('you win!');
+                winGame();
+            }
         }
     };
 };
@@ -80,7 +84,7 @@ function updateSecretWord(){
     
 
    // console.log('masked letters updated should be below here.');
-   // console.log(maskedLetters);
+   console.log(maskedLetters);
     console.log(secretWord);
     // console.log(indices);
 };
@@ -88,6 +92,16 @@ function updateSecretWord(){
 function lostGame(){
     losses++;
     document.getElementById("losses").innerHTML = losses;
+    reset();
+}
+
+function winGame(){
+    wins++;
+    document.getElementById("wins").innerHTML = wins;
+    reset();
+}
+
+function reset(){
     secretWord = "";
     maskedLetters = "";
     document.getElementById('secret-word').innerHTML = secretWord;
@@ -96,8 +110,7 @@ function lostGame(){
     lettersGuessed = [];
     document.getElementById('already-guessed').innerHTML = lettersGuessed;
     playGame();
-
-}
+};
 
 
 
